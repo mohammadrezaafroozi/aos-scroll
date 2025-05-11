@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 10000px;
+        }
+
+        #sec1 {
+            width: 100%;
+            height: 230vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            transition: .4s ease-out;
+
+            >img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            >h1 {
+                width: 100%;
+                /* border: 1px solid wheat; */
+                position: fixed;
+                top: 300px;
+                left: 5%;
+                font-family: cursive;
+                text-transform: capitalize;
+                font-size: 120px;
+                text-align: left;
+                color: rgb(156, 136, 136);
+                text-shadow: 1px 1px 10px black;
+                z-index: 9;
+            }
+        }
+
+        #sec2 {
+            width: 100%;
+            height: 700vh;
+            background-image:  linear-gradient(to top, #27252a 92%, transparent 100%);
+            position: fixed;
+            top: 100vh;
+            display: flex;
+            flex-wrap: wrap;
+            align-content: flex-start;
+            justify-content: center;
+            transition: 1s;
+            padding: 400px 0;
+
+            >p {
+                width: 70%;
+                color: white;
+                text-align: center;
+                font-size: 25px;
+                font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+                margin-bottom: 100px;
+            }
+
+            >div {
+                width: 100%;
+                height: 100vh;
+                display: flex;
+                position: sticky;
+                top: 0;
+                transition: .4s;
+                >div {
+                    width: 70%;
+                    margin-left: 200px;
+                    height: 100vh;
+                    justify-content: center;
+
+                    &:first-of-type {
+                        background-size: cover;
+                    }
+                }
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <section id="sec1">
+        <img src="img/9.jpg" alt="">
+        <h1>welcome to my page</h1>
+    </section>
+    <section id="sec2">
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, repellendus magnam aut laboriosam
+            corporis velit dolore voluptatum enim ex neque voluptates rem blanditiis excepturi pariatur, id dolor
+            dolores perspiciatis? Totam Lorem ipsum dolor, sit amet consectetur adipisicing elit. Architecto, qui...
+        </p>
+
+        <div class="slider">
+            <div id="leftSlide"></div>
+           
+        </div>
+    </section>
+</body>
+<script>
+    let oldSc = 0
+    const sec1 = document.getElementById('sec1')
+    const h = document.querySelector('#sec1>h1')
+    const sec2 = document.getElementById('sec2')
+    const slider = document.querySelector('#sec2>div')
+    const leftSlide = document.getElementById('leftSlide')
+    window.addEventListener('scroll', () => {
+        let st = window.scrollY
+        sec1.style.top = -(st / 3) + 'px'
+
+        // h1///
+        if (st < 300) {
+
+
+            if (st > oldSc) {
+                let customSize = ((h.computedStyleMap().get('font-size').value) - (st / 35))
+                h.style.fontSize = customSize + 'px'
+                h.style.top = (300 - (st / 2)) + 'px'
+            } else {
+                let customSize = ((h.computedStyleMap().get('font-size').value) + (st / 40))
+                h.style.fontSize = customSize + 'px'
+                h.style.top = ((h.computedStyleMap().get('top').value) + (st / 20)) + 'px'
+            }
+        }
+
+        // end sec1///
+
+
+
+
+
+
+
+
+        // sec2///
+        if (st > 700) {
+            let sec2Top = sec2.computedStyleMap().get('top').value
+
+            if (sec2Top > (-400)) {
+                sec2Top -= (st / 5)
+                sec2.style.top = sec2Top + 'px'
+            }
+
+        } else {
+            sec2.style.top = "100vh"
+
+        }
+
+        // slider//
+        if (st > 2000) {
+
+            if(st>2500 && st<3100){
+                leftSlide.style.backgroundImage="url(img/2.jpg)";
+            }else if(st>3100 && st<3500){
+                leftSlide.style.backgroundImage="url(img/6.jpg)";
+            }else{
+                leftSlide.style.backgroundImage="url(img/4.jpg)"
+            }
+
+           
+        }
+        // end sec2///
+
+        oldSc = st
+
+    })
+</script>
+
+</html>
+
